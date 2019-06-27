@@ -3,46 +3,48 @@
     <el-card>
       <el-table
         class="box-card"
-        :data="tableData"
-        style="width: 100%">
+        :data="tableData.data"
+        style="width: 100%"
+      @expand-change="getDetail">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="商品名称">
-                <span>{{ props.row.name }}</span>
-              </el-form-item>
-              <el-form-item label="所属店铺">
-                <span>{{ props.row.shop }}</span>
+              <el-form-item label="訂單 ID">
+                <span>{{ props.row.order_id }}</span>
               </el-form-item>
               <el-form-item label="商品 ID">
-                <span>{{ props.row.id }}</span>
+                <span>{{ props.row.product_id }}</span>
               </el-form-item>
-              <el-form-item label="店铺 ID">
-                <span>{{ props.row.shopId }}</span>
+              <el-form-item label="商品名稱">
+                <span>{{ props.row.name }}</span>
               </el-form-item>
-              <el-form-item label="商品分类">
-                <span>{{ props.row.category }}</span>
+              <el-form-item label="數量">
+                <span>{{ props.row.quantity }}</span>
               </el-form-item>
-              <el-form-item label="店铺地址">
-                <span>{{ props.row.address }}</span>
+              <el-form-item label="單價">
+                <span>{{ props.row.price }}</span>
               </el-form-item>
-              <el-form-item label="商品描述">
-                <span>{{ props.row.desc }}</span>
+              <el-form-item label="總金額">
+                <span>{{ props.row.total_amount }}</span>
               </el-form-item>
             </el-form>
           </template>
         </el-table-column>
         <el-table-column
-          label="商品 ID"
+          label="訂單 ID"
           prop="id">
         </el-table-column>
         <el-table-column
-          label="商品名称"
-          prop="name">
+          label="使用者"
+          prop="user_id">
         </el-table-column>
         <el-table-column
-          label="描述"
-          prop="desc">
+          label="狀態"
+          prop="status">
+        </el-table-column>
+        <el-table-column
+          label="金額"
+          prop="total_amount">
         </el-table-column>
       </el-table>
     </el-card>
@@ -65,42 +67,31 @@
 </style>
 
 <script>
+import { orders,orders_detail } from '../api/api'
+
 export default {
   data() {
     return {
-      tableData: [{
-        id: '12987122',
-        name: '好滋好味鸡蛋仔',
-        category: '江浙小吃、小吃零食',
-        desc: '荷兰优质淡奶，奶香浓而不腻',
-        address: '上海市普陀区真北路',
-        shop: '王小虎夫妻店',
-        shopId: '10333'
-      }, {
-        id: '12987123',
-        name: '好滋好味鸡蛋仔',
-        category: '江浙小吃、小吃零食',
-        desc: '荷兰优质淡奶，奶香浓而不腻',
-        address: '上海市普陀区真北路',
-        shop: '王小虎夫妻店',
-        shopId: '10333'
-      }, {
-        id: '12987125',
-        name: '好滋好味鸡蛋仔',
-        category: '江浙小吃、小吃零食',
-        desc: '荷兰优质淡奶，奶香浓而不腻',
-        address: '上海市普陀区真北路',
-        shop: '王小虎夫妻店',
-        shopId: '10333'
-      }, {
-        id: '12987126',
-        name: '好滋好味鸡蛋仔',
-        category: '江浙小吃、小吃零食',
-        desc: '荷兰优质淡奶，奶香浓而不腻',
-        address: '上海市普陀区真北路',
-        shop: '王小虎夫妻店',
-        shopId: '10333'
-      }]
+      tableData: [],
+    }
+  },
+  created(){
+    this.getList();
+  },
+  methods: {
+    getList(){
+      var p = {user_uuid:sessionStorage.getItem('key')};
+      orders(p).then(res=>{
+        this.tableData=res.data;
+        console.log(res.data);
+      });
+    },
+    getDetail(row){
+      console.log(row);
+      var id={user_uuid:sessionStorage.getItem('key'),order_id:row.id};
+      orders_detail(id).then(res=>{
+        console.log(res.data);
+      });
     }
   }
 }
