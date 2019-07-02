@@ -22,11 +22,9 @@
             <el-header class="header">
                 <el-breadcrumb separator-class="el-icon-arrow-right" class="el-breadcrumb">
                     <el-breadcrumb-item v-for="(item,index)  in levelList" :key="item.path">
-                        <router-link :to="item.redirect||item.path" v-if='item.meta.title'>{{item.meta.title}}
-                        </router-link>
+                        <router-link :to="item.path"  v-if='item.meta.title'>{{item.meta.title}}</router-link>
                     </el-breadcrumb-item>
                 </el-breadcrumb>
-
             </el-header>
             <el-main class="el-main">
                 <router-view></router-view>

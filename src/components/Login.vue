@@ -2,15 +2,15 @@
     <div>
         <el-card class="box-card" shadow="always">
             <h2>Login</h2>
-            <el-form label-position="top">
+            <el-form label-position="top" :rules="rules" :model="user" hide-required-asterisk="true">
                 <div>
-                    <el-form-item label="帳號：">
+                    <el-form-item label="帳號：" prop="account">
                         <el-input type="text"
                                   id="account"
                                   placeholder="account"
                                   v-model="user.account"></el-input>
                     </el-form-item>
-                    <el-form-item label="密碼：">
+                    <el-form-item label="密碼："  prop="password">
                         <el-input type="password"
                                   id="password"
                                   placeholder="password"
@@ -77,26 +77,30 @@
                     account: this.user.account,
                     password: this.user.password
                 };
-                /*console.log(form);
+                console.log(form);
                 login(form).then(res => {
                     console.log(res.data.key);
-            if (res.data.key) {
-                alert('登入成功')
-              this.$router.push("/Home");
-            }
-            if (!res.data.key) {
-              this.user.account = "";
-              this.user.password = "";
-              alert('請填入帳號或密碼')
-            }
-                })*/
-                if (this.user.account === '' && this.user.password === '') {
+                if (this.user.account === '' || this.user.password === '') {
+                    alert('請輸入帳號或密碼')
+                }
+                else {
+                    if (res.data.key) {
+                        alert('登入成功');
+                        sessionStorage.setItem('key',res.data.key);
+                        this.$router.push("/Home");
+                    }
+                    if (!res.data.key) {
+                        alert('帳號或密碼錯誤')
+                    }
+                }
+                })
+              /*  if (this.user.account === '' && this.user.password === '') {
                     alert('帳號或密碼錯誤')
                 }
                 else {
                     alert('登入成功');
                     this.$router.push('/Home')
-                }
+                }*/
             },
             SingUp() {
 
