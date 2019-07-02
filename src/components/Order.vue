@@ -80,15 +80,14 @@ export default {
   },
   methods: {
     getList(){
-      var p = {user_uuid:sessionStorage.getItem('key')};
-      orders(p).then(res=>{
+      orders().then(res=>{
         this.tableData=res.data;
         console.log(res.data);
       });
     },
     getDetail(row){
       console.log(row);
-      var id={user_uuid:sessionStorage.getItem('key'),order_id:row.id};
+      var id={order_id:row.id};
       orders_detail(id).then(res=>{
         console.log(res.data);
       });
