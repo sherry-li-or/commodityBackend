@@ -35,9 +35,9 @@
 </template>
 <script>
     export default {
-        data(){
-            return{
-                levelList:[],
+        data() {
+            return {
+                levelList: [],
             }
         },
         created() {
@@ -50,7 +50,7 @@
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
-            getBreadcrumb(){
+            getBreadcrumb() {
                 let matched = this.$route.matched.filter(item => item.name);
                 this.levelList = matched;
             }
