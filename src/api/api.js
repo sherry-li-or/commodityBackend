@@ -21,4 +21,11 @@ export function orders_detail(data) {
 		data: data,
 	})
 }
+export function product_list(data) {
+	return request({
+		method:"POST",
+		url:"/product/backendShowAll",
+		data: data,
+	})
+}
 

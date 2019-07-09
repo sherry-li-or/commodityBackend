@@ -3,7 +3,7 @@
         <div class="el-aside">
             <el-aside width="200">
                 <el-menu
-                        text-color="#fff"
+                        text-color="black"
                         active-text-color="dodgerblue"
                         default-active="2"
                         class="el-menu" router>
@@ -74,19 +74,13 @@
     }
 
     .el-aside {
-        background-color: #304156;
         width: 200px;
         height: 100vh;
     }
 
     .el-menu {
-        background-color: #304156;
         min-height: 100%;
         padding: 0;
-    }
-
-    .el-menu-item:hover {
-        background-color: #2c3e50;
     }
 
     .header {

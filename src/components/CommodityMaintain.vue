@@ -24,9 +24,14 @@
         <div class="talbe">
             <el-card>
                 <el-table
-                        :data="tableData"
+                        :data="tableData.data"
                         style="width: 100%"
                         validate-event="true">
+                    <el-table-column label="#">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.id }}</span>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="商品名稱">
                         <template slot-scope="scope">
                             <template v-if="scope.row.editing">
@@ -59,6 +64,7 @@
                                     type="danger"
                                     v-if="!scope.row.editing"
                                     icon="el-icon-delete"
+                                    size="medium"
                                     @click="handleDelete(scope.$index)">刪除
                             </el-button>
                             <el-button
@@ -66,6 +72,7 @@
                                     v-if="!scope.row.editing"
                                     icon="el-icon-edit"
                                     v-model="scope.$index"
+                                    size="medium"
                                     @click="handleEdit(scope.row)">編輯
                             </el-button>
                             <div v-else>
@@ -73,11 +80,13 @@
                                         type="info"
                                         icon="el-icon-close"
                                         v-model="scope.$index"
+                                        size="medium"
                                         @click="handleCancel(scope.row)">取消
                                 </el-button>
                                 <el-button
                                         type="success"
                                         icon="el-icon-check"
+                                        size="medium"
                                         @click="saveModify(scope.row)">儲存
                                 </el-button>
                             </div>
@@ -89,31 +98,13 @@
     </div>
 </template>
 <script>
+    import {product_list} from '../api/api'
 
     export default {
         name: 'TestWorld',
         data() {
             return {
-                tableData: [
-                    {
-                        name: 'orange',
-                        price: 100,
-                        editing: false,
-                        saving: false
-                    },
-                    {
-                        name: 'grape',
-                        price: 100,
-                        editing: false,
-                        saving: false
-                    },
-                    {
-                        name: 'banana',
-                        price: 100,
-                        editing: false,
-                        saving: false
-                    }
-                ],
+                tableData: [],
                 rules: {
                     name: [
                         {type: "string", required: true, message: '請輸入商品名稱', trigger: 'blur'}
@@ -124,6 +115,8 @@
                 },
                 prevValue: {},
                 dialogFormVisible: false,
+                editing: false,
+                saving: false,
                 newValue: {
                     name: '',
                     price: '',
@@ -131,21 +124,26 @@
                 formLabelWidth: '120px'
             }
         },
+        created() {
+          this.getProductList();
+        },
         methods: {
             handleDelete(index) { //刪除行數
-                this.tableData.splice(index, 1)
+                this.tableData.data.splice(index, 1)
             },
             handleEdit(row) {  //編輯
-                row.editing = true;
+              //  row.editing = true;
+                this.$set(row,'editing',true);
                 this.prevValue = JSON.parse(JSON.stringify(row));
                 console.log(row);
             },
             handleCancel(row) {  //取消
-                row.editing = false;
+               /* row.editing = false;
                 let prevContentName = this.prevValue.name;
                 let prevContentPrice = this.prevValue.price;
                 this.$set(row, "name", prevContentName);
-                this.$set(row, "price", prevContentPrice);
+                this.$set(row, "price", prevContentPrice);*/
+                this.$set(row,'editing',false);
             },
             saveModify(row) {               //保存
                 /* if (this.row.name !== null && this.row.price !== null){
@@ -156,11 +154,12 @@
                  else {
                   alert('商品名稱及價錢不能是空的');
                }*/
-                if (row.name == "" || row.price == "") {
+                if (row.name === "" || row.price === "") {
                     alert('商品名稱及價錢不能是空的');
                 } else {
-                    row.editing = false;
-                    row.saving = true;
+                    //row.editing = false;
+                    //row.saving = true;
+                    this.$set(row,'editing',false);
                 }
             },
             clearInput() {
@@ -177,7 +176,7 @@
                     alert('商品名稱及價錢不能是空的');
                     return false;
                 }
-                this.tableData.push({
+                this.tableData.data.push({
                     name: this.newValue.name,
                     price: this.newValue.price,
                     editing: false,
@@ -189,7 +188,13 @@
             /*handleInput(event) {
               return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )
           }*/
-
+            getProductList(){
+                var a = {user_uuid:sessionStorage.getItem('key')};
+                product_list(a).then(res=>{
+                    this.tableData=res.data;
+                    console.log(res.data);
+                });
+            }
         }
     }
 </script>

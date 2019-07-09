@@ -2,7 +2,9 @@
     <div>
         <el-card class="box-card" shadow="always">
             <h2>Login</h2>
-            <el-form label-position="top" :rules="rules" :model="user" hide-required-asterisk="true">
+            <el-form label-position="top" :rules="rules"
+                     :model="user"
+                     hide-required-asterisk="true">
                 <div>
                     <el-form-item label="帳號：" prop="account">
                         <el-input type="text"
@@ -15,6 +17,7 @@
                                   id="password"
                                   placeholder="password"
                                   v-model="user.password"
+                                  @keyup.enter.native="login"
                                   show-password></el-input>
                     </el-form-item>
                 </div>
