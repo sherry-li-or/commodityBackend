@@ -71,21 +71,6 @@
     </el-card>
   </div>
 </template>
-
-<style>
-
-.demo-table-expand label {
-  width: 90px;
-  color: #99a9bf;
-}
-
-.demo-table-expand .el-form-item {
-  margin-right: 0;
-  margin-bottom: 0;
-  width: 50%;
-}
-</style>
-
 <script>
 import { orders, orders_detail } from '../api/api'
 
@@ -102,22 +87,42 @@ export default {
   },
   methods: {
     getList(){
-      orders().then(res=>{
-        this.tableData=res.data.data;
-        /*this.tableData.forEach(el => {
+      let a = this;
+      orders({}).then((res)=>{
+        a.tableData=res.data.data;
+        Object.keys(sessionStorage)
+       /* this.tableData.forEach(el => {
           el.detail = [];
         });*/
-        console.log(res.data);
       });
     },
     getDetail(row){
+      this.dialogTableVisible = true;
       console.log(row);
+      let a = this;
       var id={order_id:row.id};
-      orders_detail(id).then(res=>{
+      orders_detail(id).then((res)=>{
         console.log(res.data);
-        this.detailData = res.data.data;
+        a.detailData = res.data.data;
       });
     }
   }
 }
 </script>
+
+<style>
+  .demo-table-expand {
+    font-size: 0;
+  }
+
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+</style>

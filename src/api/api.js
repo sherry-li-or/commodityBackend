@@ -7,10 +7,11 @@ export function login(data) {
 		data:data
 	})
 }
-export function orders() {
+export function orders(data) {
 	return request({
 		method:"POST",
 		url:"/orders/showOrderListForBackend",
+		data,
 	})
 }
 export function orders_detail(data) {
