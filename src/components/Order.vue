@@ -73,9 +73,6 @@
 </template>
 
 <style>
-.demo-table-expand {
-  font-size: 0;
-}
 
 .demo-table-expand label {
   width: 90px;
@@ -104,27 +101,12 @@ export default {
     this.getList();
   },
   methods: {
-    /*getList() {
-      var p = {user_uuid: sessionStorage.getItem('key')};
-      orders(p).then(res => {
-        this.tableData = res.data.data;
-        this.tableData.forEach(el => {
-          el.detail = [];
-        });
-        console.log(res.data);
-      });
-    },*/
-    /*getDetail(row) {
-      var id = {user_uuid: sessionStorage.getItem('key'), order_id: row.id};
-      this.dialogTableVisible = true;
-      orders_detail(id).then(res => {*/
-        //this.$set(row, 'detail', res.data.data);
     getList(){
       orders().then(res=>{
         this.tableData=res.data.data;
-        this.tableData.forEach(el => {
+        /*this.tableData.forEach(el => {
           el.detail = [];
-        });
+        });*/
         console.log(res.data);
       });
     },
