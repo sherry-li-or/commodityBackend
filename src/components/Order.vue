@@ -71,24 +71,6 @@
     </el-card>
   </div>
 </template>
-
-<style>
-.demo-table-expand {
-  font-size: 0;
-}
-
-.demo-table-expand label {
-  width: 90px;
-  color: #99a9bf;
-}
-
-.demo-table-expand .el-form-item {
-  margin-right: 0;
-  margin-bottom: 0;
-  width: 50%;
-}
-</style>
-
 <script>
 import { orders, orders_detail } from '../api/api'
 
@@ -104,21 +86,6 @@ export default {
     this.getList();
   },
   methods: {
-    /*getList() {
-      var p = {user_uuid: sessionStorage.getItem('key')};
-      orders(p).then(res => {
-        this.tableData = res.data.data;
-        this.tableData.forEach(el => {
-          el.detail = [];
-        });
-        console.log(res.data);
-      });
-    },*/
-    /*getDetail(row) {
-      var id = {user_uuid: sessionStorage.getItem('key'), order_id: row.id};
-      this.dialogTableVisible = true;
-      orders_detail(id).then(res => {*/
-        //this.$set(row, 'detail', res.data.data);
     getList(){
       orders().then(res=>{
         this.tableData=res.data.data;
@@ -139,3 +106,20 @@ export default {
   }
 }
 </script>
+
+<style>
+  .demo-table-expand {
+    font-size: 0;
+  }
+
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+</style>

@@ -10,20 +10,13 @@ const service = axios.create({
         'Cache-Control': 'no-cache'
     },
     withCredentials: false,
-   /* transformRequest: [function (data) {
-        if (sessionStorage.getItem('key')) {
-            data.user_uuid = sessionStorage.getItem('key')
-        }
-        return data;
-    }],*/
 });
 
 service.interceptors.request.use(config => {
-
-    /* const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('key');
      if (token) {
-         config.headers['Authorization'] = 'Bearer ' + token;
-     }*/
+         config.data['key'] = token;
+     }
 
     return config
 }, error => {
