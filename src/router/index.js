@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
-import CommodityMaintain from '../components/CommodityMaintain'
+import CommodityMaintain from '../components/ProductMaintain'
 import Order from '../components/Order'
 
 Vue.use(VueRouter);

@@ -4,7 +4,7 @@
             <h2>Login</h2>
             <el-form label-position="top" :rules="rules"
                      :model="user"
-                     hide-required-asterisk="true">
+                     :hide-required-asterisk=true>
                 <div>
                     <el-form-item label="帳號：" prop="account">
                         <el-input type="text"

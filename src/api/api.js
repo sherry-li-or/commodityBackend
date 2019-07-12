@@ -1,5 +1,6 @@
 import request from '../util/request';
 
+//發起請求
 export function login(data) {
 	return request({
 		method:"POST",
@@ -25,6 +26,27 @@ export function product_list(data) {
 	return request({
 		method:"POST",
 		url:"/product/backendShowAll",
+		data: data,
+	})
+}
+export function product_delete(data) {
+	return request({
+		method:"POST",
+		url:"/product/deleteProduct",
+		data: data,
+	})
+}
+export function product_add(data) {
+	return request({
+		method:"POST",
+		url:"/product/addNewProduct",
+		data: data,
+	})
+}
+export function product_update(data) {
+	return request({
+		method:"POST",
+		url:"/product/updateProductData",
 		data: data,
 	})
 }

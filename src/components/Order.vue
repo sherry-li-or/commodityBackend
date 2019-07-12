@@ -91,6 +91,7 @@ export default {
       orders({}).then((res)=>{
         a.tableData=res.data.data;
         Object.keys(sessionStorage)
+        console.log({});
        /* this.tableData.forEach(el => {
           el.detail = [];
         });*/
