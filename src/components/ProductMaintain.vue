@@ -140,6 +140,9 @@ export default {
   created() {
     this.getProductList();
   },
+  mounted() {
+    this.getProductList();
+  },
   methods: {
     handleDelete(row) {   //刪除行數
       //this.tableData.data.splice(index, 1)

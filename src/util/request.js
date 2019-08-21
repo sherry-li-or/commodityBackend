@@ -9,7 +9,7 @@ const service = axios.create({
         'Pragma': 'no-cache',
         'Cache-Control': 'no-cache'
     },
-    withCredentials: false,
+    withCredentials: false,     // 是否攜帶cookie
 });
 
 service.interceptors.request.use(config => {

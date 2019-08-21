@@ -98,7 +98,7 @@ html, body {
 }
 
 .el-aside {
-  width: 200px;
+  width: 400px;
   height: 100vh;
 }
 
